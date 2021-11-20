@@ -250,7 +250,7 @@ class CloudFrontSignedURL
 {
   var $pref;
 
-  //設定
+  //Config
   public function __construct($config)
   {
     $_cdn = $config['params']['cdn_redirect'];
@@ -265,12 +265,12 @@ class CloudFrontSignedURL
     */
   }
 
-  //CloudFront向け署名を生成
+  //Generate sign for CloudFront
   public function registerSignedURL(): array
   {
-    //ポリシー雛形
-    $date_greater_than = time() - 60 * 3; //有効期限は、3分前から
-    $date_less_than = time() + 60 * 3; //3分後まで
+    //policy
+    $date_greater_than = time() - 60 * 3; //valid from 3 min before
+    $date_less_than = time() + 60 * 3; //... to 3 min after
     $policy_0 = [
       "Resource" => "https://" . $this->pref['cdn_domain'] . "/*",
       "Condition" => [
@@ -284,10 +284,10 @@ class CloudFrontSignedURL
     ];
     $policy = ["Statement" => [0 => $policy_0]];
     $policy_json = json_encode($policy, JSON_INVALID_UTF8_IGNORE);
-    //（Cookieセーフなbase64エンコード）
+    // URL-safe base64 encode
     $policy_json_b64 = $this->url_safe_base64_encode($policy_json);
 
-    //ポリシーを秘密鍵で暗号化
+    //Encode the policy with private key
     $pkeyid = openssl_pkey_get_private(
       join("", file(
         $this->pref['path_private_key']
@@ -295,7 +295,7 @@ class CloudFrontSignedURL
     );
     openssl_sign($policy_json, $policy_signed, $pkeyid);
     unset($pkeyid);
-    //（Cookieセーフなbase64エンコード）
+    // URL-safe base64 encode
     $policy_signed_b64 = $this->url_safe_base64_encode($policy_signed);
 
     //
