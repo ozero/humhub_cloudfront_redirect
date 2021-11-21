@@ -234,8 +234,8 @@ function forward($arg, $config)
     return false;
   }
 
-  # Add sign, then redirect using "Location: " header
-  $cf = new CloudFrontSignedURL();
+  #署名付加して"Location: "headerでリダイレクト
+  $cf = new CloudFrontSignedURL($config);
   $sign = $cf->registerSignedURL();
   $url_signed = "{$url_raw}?a=1&Policy={$sign['p']}&Signature={$sign['s']}&Key-Pair-Id={$sign['k']}";
   $url_signed = ($arg['f'] != "") ? $url_signed . "&filename=" . $arg['f'] : $url_signed;
