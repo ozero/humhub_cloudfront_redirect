@@ -1,0 +1,13 @@
+
+#Fuse s3fs for Humhub
+s3fs#YOUR-S3-BUCKET-NAME:/YOUR-BUCKET-PATH /path/to/mountpoint fuse _netdev,rw,nosuid,nodev,noatime,nonempty,allow_other,uid=33,gid=33,passwd_file=/path/to/.passwd-s3fs,use_cache=/path/to/tmp,ensure_diskfree=3000,enable_noobj_cache,enable_content_md5,multireq_max=2 0 0
+
+# If you're going to use "s3://mybucketname/mypath/"
+# YOUR-S3-BUCKET-NAME : "mybucketname"
+# YOUR-BUCKET-PATH : "mypath"
+
+# "uid=33,gid=33" depends on uid & gid used by php runtime.
+# Cf. Type "sudo -u www-data bash", then "id".
+
+# "ensure_diskfree=3000" if you spare 3GB disk free from s3 cache
+
