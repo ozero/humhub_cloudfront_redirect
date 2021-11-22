@@ -57,7 +57,7 @@ function main()
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
-//Parse GET variables
+//Parse GET variables passed from Nginx rewrite
 function arg_receive()
 {
   $ret = [];
