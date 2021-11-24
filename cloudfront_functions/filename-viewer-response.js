@@ -3,6 +3,7 @@ function handler(event) {
     // Choose viewer request for event trigger when you associate this function with a distribution. 
 
     var response = event.response;
+    var headers = response.headers;
     
     //Add content-disposition if "filename" querystring exists.
     var req_qstr = event.request.querystring;
@@ -12,9 +13,10 @@ function handler(event) {
     if(req_qstr.filename){
         if(req_qstr.filename.value){
             filename = req_qstr.filename.value;
-            response.headers['content-disposition'] = {value: "attachment; filename=" + filename };
+            headers['content-disposition'] = {value: "attachment; filename=" + filename };
         }
     }
+    
     //
     return response;
 }
