@@ -207,27 +207,27 @@ function forward($arg, $config)
   $url_raw = "";
 
   # /r.php?c=pv&g=$arg_guid
-  #return 302 https://$CDN_DOMAIN/file/$guid_1/$guid_2/$arg_guid/preview-image;
+  #return 302 https://$CDN_DOMAIN/uploads/file/$guid_1/$guid_2/$arg_guid/preview-image;
   if ($arg['c'] == "pv") {
-    $url_raw = "https://{$cdn_domain}/file/" . substr($arg['g'], 0, 1) . "/" . substr($arg['g'], 1, 1) . "/{$arg['g']}/preview-image";
+    $url_raw = "https://{$cdn_domain}/uploads/file/" . substr($arg['g'], 0, 1) . "/" . substr($arg['g'], 1, 1) . "/{$arg['g']}/preview-image";
   }
 
   # /r.php?c=dl&g=$arg_guid
-  #return 302 https://$CDN_DOMAIN/file/$guid_1/$guid_2/$arg_guid/file;
+  #return 302 https://$CDN_DOMAIN/uploads/file/$guid_1/$guid_2/$arg_guid/file;
   if ($arg['c'] == "dl") {
-    $url_raw = "https://{$cdn_domain}/file/" . substr($arg['g'], 0, 1) . "/" . substr($arg['g'], 1, 1) . "/{$arg['g']}/file";
+    $url_raw = "https://{$cdn_domain}/uploads/file/" . substr($arg['g'], 0, 1) . "/" . substr($arg['g'], 1, 1) . "/{$arg['g']}/file";
   }
 
   # /r.php?c=pf&g=$arg_guid
-  #rewrite ^/.*?profile_image\/([0-9a-f\-]+)(\.[a-z]+).*?$ https://$CDN_DOMAIN/profile_image/$1$2 break;
+  #rewrite ^/.*?profile_image\/([0-9a-f\-]+)(\.[a-z]+).*?$ https://$CDN_DOMAIN/uploads/profile_image/$1$2 break;
   if ($arg['c'] == "pf") {
-    $url_raw = "https://{$cdn_domain}/profile_image/{$arg['g']}.{$arg['e']}";
+    $url_raw = "https://{$cdn_domain}/uploads/profile_image/{$arg['g']}.{$arg['e']}";
   }
 
   # /r.php?c=pb&g=$arg_guid
-  #rewrite ^/.*?profile_image\/banner\/([0-9a-f\-]+)(\.[a-z]+).*?$ https://$CDN_DOMAIN/profile_image/banner/$1$2 break;
+  #rewrite ^/.*?profile_image\/banner\/([0-9a-f\-]+)(\.[a-z]+).*?$ https://$CDN_DOMAIN/uploads/profile_image/banner/$1$2 break;
   if ($arg['c'] == "pb") {
-    $url_raw = "https://{$cdn_domain}/profile_image/banner/{$arg['g']}.{$arg['e']}";
+    $url_raw = "https://{$cdn_domain}/uploads/profile_image/banner/{$arg['g']}.{$arg['e']}";
   }
 
   if ($url_raw == "") {
