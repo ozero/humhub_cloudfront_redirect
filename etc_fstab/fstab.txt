@@ -1,7 +1,7 @@
 
 
 # fstab Humhub
-s3fs#YOUR-S3-BUCKET-NAME:/YOUR-BUCKET-PATH /path/to/mountpoint fuse _netdev,rw,nosuid,nodev,noatime,nonempty,allow_other,uid=33,gid=33,passwd_file=/path/to/.passwd-s3fs,use_cache=/path/to/tmp,ensure_diskfree=3000,enable_noobj_cache,enable_content_md5,multireq_max=2 0 0
+s3fs#YOUR-S3-BUCKET-NAME:/YOUR-BUCKET-PATH /path/to/mountpoint fuse _netdev,rw,nosuid,nodev,noatime,nonempty,allow_other,uid=33,gid=33,passwd_file=/path/to/.passwd-s3fs,use_cache=/path/to/cache,ensure_diskfree=3000,enable_noobj_cache,enable_content_md5,multireq_max=2 0 0
 
 # If you're going to use "s3://mybucketname/mypath/uploads" for `/path/to/humhub/uploads`,
 # YOUR-S3-BUCKET-NAME : "mybucketname"
@@ -12,3 +12,6 @@ s3fs#YOUR-S3-BUCKET-NAME:/YOUR-BUCKET-PATH /path/to/mountpoint fuse _netdev,rw,n
 
 # "ensure_diskfree=3000" if you spare 3GB disk free from s3 cache
 
+
+# Sample: goofys: fstab Humhub
+# goofys#YOUR-S3-BUCKET-NAME:YOUR-BUCKET-PATH /path/to/mountpoint fuse _netdev,rw,nosuid,nodev,noatime,allow_other,--file-mode=0666,--dir-mode=0777,--uid=33,--gid=33,--cache=-o:allow_other:--free:3G:/path/to/cache 0 0
